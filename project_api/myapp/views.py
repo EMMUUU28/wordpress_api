@@ -7,4 +7,4 @@ def index(request):
     
     response = requests.get(url)
     print(response.json())
-    return HttpResponse("Hello")
+    return HttpResponse("Hello The Api is working well")
