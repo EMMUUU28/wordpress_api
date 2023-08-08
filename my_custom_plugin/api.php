@@ -8,7 +8,7 @@ function store_name()
     return $name;
 }
 
-# To get plugin name and version 
+# To get plugin name and version
 
 function plugin_info(){
     if ( ! function_exists( 'get_plugins' ) ) {
@@ -73,5 +73,22 @@ function plugin_details(){
 
 }
 
-  
- 
+#function to get login credentials 
+
+
+
+function login()
+{
+    $user_info_object = wp_get_current_user();
+    $useremail = $user_info_object->user_email;
+    $username = $user_info_object->user_name;
+    $response = array(
+        'user_email' => $useremail,
+        'user_name'=> $username,
+    );
+
+    return json_encode($response);
+
+}
+
+

@@ -3,9 +3,11 @@
 <?php
 
 require_once('/var/www/html/wordpress/wp-load.php');
-
+$x = wp_get_current_user();
+echo $x;
 require_once 'api.php';
-
+add_action('init', 'login');
+add_action('init', 'storeinfo');
 /*
 Plugin Name: My Custom Plugin Main
 Plugin URI: https://www.example.com/my-custom-plugin
@@ -30,21 +32,44 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+function get_user_info(){
+    $current_user = wp_get_current_user(); 
+  
 
+    return json_encode($current_user->user_login);
+  
+    // Do the remaining stuff that has to happen once you've gotten your user info
+  }
 
-if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'store_data'){
+if($_SERVER['REQUEST_METHOD'] === 'GET')
+{
+    if(isset($_GET['action']) && $_GET['action'] === 'store_data'){
     
 
-    $result = store_name();
-    $plugin_data = plugin_info();
-    $data=array();
-    $data['result'] = $result;
-    $data['plugin_data'] = $plugin_data;
-    echo json_encode($data);
-   
-    exit;
+        $result = store_name();
+        $plugin_data = plugin_info();
+        $data=array();
+        $data['result'] = $result;
+        $data['plugin_data'] = $plugin_data;
+        echo json_encode($data);
+       
+        exit;
+    }
+    else if(isset($_GET['login']))
+    {
+        ?> <script>console.log("<?php echo "hii" ?>")</script><?php
+        $info=wp_get_current_user();
+
+    }
+    else if(isset($_GET['contact']))
+    {
+        ?> <script>console.log("Workingwell")</script><?php
+    }
+    
 }
 
+
+add_action( 'init', 'login' );
 
 // Hook the function to a WordPress action.
 // add_action('wp_footer', 'my_custom_message');
