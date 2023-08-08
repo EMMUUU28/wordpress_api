@@ -1,11 +1,31 @@
 <?php
 
+
+#To get store name 
 function store_name()
 {
     $name = get_bloginfo('name');
     return $name;
 }
 
+# To get plugin name and version
+
+function plugin_info(){
+    if ( ! function_exists( 'get_plugins' ) ) {
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+    }
+    
+    $all_plugins = get_plugins();
+    $plugins = get_plugins();
+
+    $plugin_names = array();
+    foreach ($plugins as $plugin_file => $plugin_data) {
+        $plugin_names[] = esc_html($plugin_data['Name']) . ' - Version: ' . esc_html($plugin_data['Version']);
+    }
+    return $plugin_names;
+}
+ 
+#To get the  store information
 function storeinfo(){
 
     $store_name = get_bloginfo('url');
@@ -29,20 +49,9 @@ function storeinfo(){
     
     return json_encode($response);
     
-
 }
 
-
-function plugin_info(){
-    $store_name = get_bloginfo('name');
-    $plugins = get_plugins();
-    $plugin_names = array();
-    foreach ($plugins as $plugin_file => $plugin_data) {
-        $plugin_names[] = esc_html($plugin_data['Name']) . ' - Version: ' . esc_html($plugin_data['Version']);
-    }
-    return $plugin_names;
-}
-
+#To get plugin ingo 
 function plugin_details(){
 
     $store_name = get_bloginfo('name');
@@ -64,5 +73,5 @@ function plugin_details(){
 
 }
 
-?>   
+  
  

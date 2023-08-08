@@ -2,10 +2,12 @@
 
 <?php
 
+require_once('/var/www/html/wordpress/wp-load.php');
+
 require_once 'api.php';
 
 /*
-Plugin Name: My Custom Plugin
+Plugin Name: My Custom Plugin Main
 Plugin URI: https://www.example.com/my-custom-plugin
 Description: A simple custom plugin to display a message on the front-end.
 Version: 1.0
@@ -16,6 +18,12 @@ License: GPLv2 or later
 
 
 
+// if (file_exists(plugin_dir_path(__FILE__) . 'api.php')) {
+//     echo 'api.php file exists and is being included successfully.';
+// } else {
+//     echo 'api.php file does not exist or there is an issue including it.';
+// }
+
 
 // Exit if accessed directly.
 if (!defined('ABSPATH')) {
@@ -23,7 +31,8 @@ if (!defined('ABSPATH')) {
 }
 
 
-if($_SERVER['REQUEST_METHOD']=== 'GET' && isset($_GET['action']) && $_GET['action'] === 'store_data'){
+
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'store_data'){
     
 
     $result = store_name();
@@ -35,18 +44,13 @@ if($_SERVER['REQUEST_METHOD']=== 'GET' && isset($_GET['action']) && $_GET['actio
    
     exit;
 }
-else {
-    // Invalid API endpoint or request method
-    http_response_code(404);
-    echo json_encode(['error' => 'Invalid endpoint']);
-    exit;
-}
+
 
 // Hook the function to a WordPress action.
 // add_action('wp_footer', 'my_custom_message');
 
 // AJAX Handler for 'get_store_info' action.
-add_action('wp_ajax_get_store_info', 'storeinfo');
+// add_action('wp_ajax_get_store_info', 'storeinfo');
 // AJAX Handler for 'authenticate' action.
 
 // add_action('init','plugin_details' );
