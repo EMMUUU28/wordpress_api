@@ -8,3 +8,6 @@ def index(request):
     response = requests.get(url)
     print(response.json())
     return HttpResponse("Hello The Api is working well")
+
+def auth(request):
+    return HttpResponse("Hello")
