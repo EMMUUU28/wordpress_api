@@ -8,7 +8,7 @@ function store_name()
     return $name;
 }
 
-# To get plugin name and version
+# To get plugin name and version 
 
 function plugin_info(){
     if ( ! function_exists( 'get_plugins' ) ) {
