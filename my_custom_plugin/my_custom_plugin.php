@@ -13,6 +13,9 @@ Author: Your Name
 Author URI: https://www.example.com
 License: GPLv2 or later
 */
+
+
+
 // To chech weather the file api.php exists 
 // if (file_exists(plugin_dir_path(__FILE__) . 'api.php')) {
 //     echo 'api.php file exists and is being included successfully.';
@@ -25,7 +28,6 @@ License: GPLv2 or later
 if (!defined('ABSPATH')) {
     exit;
 }
-
 
 # API Hooks 
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
