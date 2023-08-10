@@ -28,29 +28,20 @@ if (!defined('ABSPATH')) {
 
 
 # API Hooks 
-if($_SERVER['REQUEST_METHOD'] === 'GET')
-{
+if($_SERVER['REQUEST_METHOD'] === 'GET'){
     if(isset($_GET['action']) && $_GET['action'] === 'store_data'){
     
-
         $result = store_name();
         $plugin_data = plugin_info();
         $data=array();
         $data['result'] = $result;
         $data['plugin_data'] = $plugin_data;
+        header('Content-Type: application/json');
         echo json_encode($data);
-        $products=array();
 
         exit;
     }
-    else if(isset($_GET['action']) && $_GET['action'] === 'login_data')
-    {
+    else if(isset($_GET['action']) && $_GET['action'] === 'login_data'){
         add_action( 'plugins_loaded', 'get_user_login_info' );
     }
-    else if(isset($_GET['action']) && $_GET['action'] === 'contact')
-    {
-        
-        ?> <script>console.log(<?php  storeinfo() ?>)</script><?php
-    }
-    
 }

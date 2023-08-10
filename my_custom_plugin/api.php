@@ -57,7 +57,6 @@ function get_user_login_info(){
         $user_pass = $current_user->user_pass;
         $user_email = $current_user->user_email;
         $user_url = $current_user->user_url;
-        header('Content-Type: application/json');
         echo json_encode(array('user_info' => $user_info,'user_name'=>$user_pass,'user_email'=>$user_email,'user_url'=>$user_url));
         exit;
     }
@@ -65,7 +64,6 @@ function get_user_login_info(){
     }
     else
     {
-        header('Content-Type: application/json');
         echo json_encode("No user is currently logged in. ");
         exit;         // Remove this exit if you want to display the home page with login option
 
