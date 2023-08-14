@@ -1,6 +1,5 @@
 <?php
 
-
 #To get store name 
 function store_name(){
     $name = get_bloginfo('name');
@@ -57,6 +56,7 @@ function get_user_login_info(){
         $user_pass = $current_user->user_pass;
         $user_email = $current_user->user_email;
         $user_url = $current_user->user_url;
+       
         echo json_encode(array('user_info' => $user_info,'user_name'=>$user_pass,'user_email'=>$user_email,'user_url'=>$user_url));
         exit;
     }
@@ -70,5 +70,41 @@ function get_user_login_info(){
     }
 }
 
+# To get order details 
+function order_details() {
+
+    $args = array(
+        'limit' => 1,      // Get latest 1 orders.
+    );
+    $orders = wc_get_orders( $args );
+    $data = $orders[0];
+
+   $order_id = $data->get_id(); // Assuming the class has a method to get the data ID
+   $order_status = $data->get_status();
+   $order_total = $data->get_total();
+   $customer_id = $data->get_customer_id();
+   $billing_first_name = $data->get_billing_first_name();
+   $billing_last_name = $data->get_billing_last_name();
+
+   ?> <script> console.log('Orders are fetched succefully ')</script> <?php  
+
+   $extracted_data = array(
+       "order_id" => $order_id,
+       "order_status" => $order_status,
+       "order_total" => $order_total,
+       "customer_id" => $customer_id,
+       "billing_first_name" => $billing_first_name,
+       "billing_last_name" => $billing_last_name,
+       // ... (similarly, add other properties)
+   );
+
+   $json_response = json_encode($extracted_data);
+//    return $json_response;
+
+?> <script> 
+ </script> <?php  
+
+
+}
 
 

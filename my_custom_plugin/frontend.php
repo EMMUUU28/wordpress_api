@@ -1,6 +1,5 @@
 <?php
 
-
 function popup()
 {
     ?> <script> console.log("Popup") </script> <?php

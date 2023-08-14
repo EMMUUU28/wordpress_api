@@ -1,5 +1,3 @@
-
-
 <?php
 
 require_once('/var/www/html/wordpress/wp-load.php');
@@ -51,35 +49,13 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
 
 #To Display popup
 add_action('init','popup');
-add_action('init','order_details');
 
 
-function orderid()
-{
-    if (isset($_GET['order-received'])) {
-        // Get the order ID from the $_GET variable (for non-permalink structures)
-        $order_id = absint($_GET['order-received']);
-        return json_encode($order_id);
-    }
-    else{
-        return json_encode("Not Found");
-    }
-}
-$x=46;
-function order_details($x)
-{
-    $arr=array();
-    ?> 
-    <script> console.log('<?php echo "h "?>')</script>
 
-    <?php 
-    
-    $orders = wc_get_order($x);
 
-    // ?> <script> console.log('hi')</script> <?php 
-    echo json_encode($orders);
-    // $billing_first_name= $order->billing_first_name;
-   
-    // $data =["billing_first_name"=>$billing_first_name];
-   
-}
+add_action( 'init', 'order_details' );
+
+
+//  var_dump($orders);
+
+
