@@ -48,14 +48,12 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
 }
 
 #To Display popup
-add_action('init','popup');
+add_action('wp_enqueue_scripts','popup');
+
+#To get order details 
+add_action( 'woocommerce_thankyou', 'order_details' );  
 
 
 
-
-add_action( 'init', 'order_details' );
-
-
-//  var_dump($orders);
 
 

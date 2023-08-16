@@ -79,31 +79,53 @@ function order_details() {
     $orders = wc_get_orders( $args );
     $data = $orders[0];
 
-   $order_id = $data->get_id(); // Assuming the class has a method to get the data ID
-   $order_status = $data->get_status();
-   $order_total = $data->get_total();
-   $customer_id = $data->get_customer_id();
-   $billing_first_name = $data->get_billing_first_name();
-   $billing_last_name = $data->get_billing_last_name();
 
-   ?> <script> console.log('Orders are fetched succefully ')</script> <?php  
+    #To get specific order details 
+//    $order_id = $data->get_id(); // Assuming the class has a method to get the data ID
+//    $order_status = $data->get_status();
+//    $order_total = $data->get_total();
+//    $customer_id = $data->get_customer_id();
+//    $billing_first_name = $data->get_billing_first_name();
+//    $billing_last_name = $data->get_billing_last_name();
 
-   $extracted_data = array(
-       "order_id" => $order_id,
-       "order_status" => $order_status,
-       "order_total" => $order_total,
-       "customer_id" => $customer_id,
-       "billing_first_name" => $billing_first_name,
-       "billing_last_name" => $billing_last_name,
-       // ... (similarly, add other properties)
-   );
+    ?> <script> console.log('Orders are fetched succefully ')</script> <?php  
 
-   $json_response = json_encode($extracted_data);
+//    $extracted_data = array(
+//        "order_id" => $order_id,
+//        "order_status" => $order_status,
+//        "order_total" => $order_total,
+//        "customer_id" => $customer_id,
+//        "billing_first_name" => $billing_first_name,
+//        "billing_last_name" => $billing_last_name,
+//        // ... (similarly, add other properties)
+//    );
+
+//    $json_response = json_encode($extracted_data);
 //    return $json_response;
 
-?> <script> 
- </script> <?php  
-
+//AJAX to send order details
+ ?> 
+ 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    var orderDetails = <?php echo $data?>;
+    $.ajax({
+        url: 'http://127.0.0.1:8000/orders/',
+        type: 'POST',
+        data: JSON.stringify(orderDetails),
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function (response) {
+            console.log('orderDetails:', orderDetails);
+            console.log('Data sent successfully to Django:',response);
+        },
+        error: function (xhr, status, error) {
+            console.error('Error sending data to Django:', error);
+        }
+    });
+    </script>
+    
+<?php
 
 }
 
