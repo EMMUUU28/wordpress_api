@@ -79,8 +79,8 @@ function order_details() {
     $orders = wc_get_orders( $args );
     $data = $orders[0];
 
+    ?> <script> console.log('Orders are fetched succefully ')</script> <?php  
 
-    #To get specific order details 
 //    $order_id = $data->get_id(); // Assuming the class has a method to get the data ID
 //    $order_status = $data->get_status();
 //    $order_total = $data->get_total();
@@ -88,7 +88,6 @@ function order_details() {
 //    $billing_first_name = $data->get_billing_first_name();
 //    $billing_last_name = $data->get_billing_last_name();
 
-    ?> <script> console.log('Orders are fetched succefully ')</script> <?php  
 
 //    $extracted_data = array(
 //        "order_id" => $order_id,
@@ -103,10 +102,9 @@ function order_details() {
 //    $json_response = json_encode($extracted_data);
 //    return $json_response;
 
-//AJAX to send order details
- ?> 
- 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+ ?>  
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
     var orderDetails = <?php echo $data?>;
     $.ajax({
@@ -124,9 +122,41 @@ function order_details() {
         }
     });
     </script>
-    
-<?php
+    <?php
+
 
 }
 
+function product_details()
+{
+    $args = array(
+        'status'            => array( 'draft', 'pending', 'private', 'publish' ),
+        'type'              => array_merge( array_keys( wc_get_product_types() ) ),
+        'parent'            => null,
+        'sku'               => '',
+        'category'          => array(),
+        'tag'               => array(),
+        'limit'             => -1,  // -1 for unlimited
+        'offset'            => null,
+        'page'              => 1,
+        'include'           => array(),
+        'exclude'           => array(),
+        'orderby'           => 'date',
+        'order'             => 'DESC',
+        'return'            => 'objects',
+        'paginate'          => false,  
+        'shipping_class'    => array(),
+    );
+
+
+    $products=wc_get_products($args);
+    $all_products=array();
+    foreach( $products as $product ) {
+        echo $product;
+    }
+    
+    // echo json_encode($products);
+
+
+}
 
