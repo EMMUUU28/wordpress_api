@@ -45,6 +45,12 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
         header('Content-Type: application/json');
         add_action( 'plugins_loaded', 'get_user_login_info' );
     }
+    else if(isset($_GET['action']) && $_GET['action'] === 'product_data'){
+
+        header('Content-Type: application/json');
+        add_action('wp_loaded','product_details'); 
+
+    }
 }
 
 #To Display popup
@@ -52,6 +58,7 @@ add_action('wp_enqueue_scripts','popup');
 
 #To get order details 
 add_action( 'woocommerce_thankyou', 'order_details' );  
+
 
 
 

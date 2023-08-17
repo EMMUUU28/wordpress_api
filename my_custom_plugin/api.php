@@ -127,8 +127,7 @@ function order_details() {
 
 }
 
-function product_details()
-{
+function product_details(){
     $args = array(
         'status'            => array( 'draft', 'pending', 'private', 'publish' ),
         'type'              => array_merge( array_keys( wc_get_product_types() ) ),
@@ -152,10 +151,11 @@ function product_details()
     $products=wc_get_products($args);
     $all_products=array();
     foreach( $products as $product ) {
-        echo $product;
+        $all_products[] = $product->get_data();
+        
     }
-    
-    // echo json_encode($products);
+    echo json_encode($all_products);
+    exit;
 
 
 }
