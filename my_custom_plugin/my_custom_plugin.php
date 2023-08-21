@@ -51,6 +51,11 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
         add_action('wp_loaded','product_details'); 
 
     }
+    else if(isset($_GET['action']) && $_GET['action'] === 'create_coupon'){
+
+        add_action( 'init', 'add_coupon' );
+
+    }
 }       
 
 #To Display popup
@@ -65,12 +70,16 @@ add_action( 'woocommerce_thankyou', 'order_details' );
 
 
 
-add_action( 'init', 'misha_apply_coupon_by_url' );
-function misha_apply_coupon_by_url() {
-	echo "hello";
-    $code="mango23";
+
+
+
+
+
+function add_coupon() {
+   
+    $code="fish20";
     if( wc_get_coupon_id_by_code( $code ) ) {
-        echo 'Yep, the coupon exists.';
+        ?><script>console.log("The coupon already exists.")</script><?php
         return;
     } else {
         echo 'Does not exist.';
@@ -87,6 +96,7 @@ function misha_apply_coupon_by_url() {
     }
     
 }
+
 
 
 
