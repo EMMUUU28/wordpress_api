@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coupon</title>
+</head>
+<body>
+    <h1>Create Coupon </h1>
+   <form id="form" action="" method="post">
+
+    <label for="name">Coupon name: </label>
+    <input name="name" type="text">
+    <br>
+    <br>
+    <label for="amount">Coupon amount: </label>
+    <input name="amount" type="number">
+    <br>
+    <button type="submit" value="submit" >Create</button>
+
+   </form>
+    
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script>  
+          document.addEventListener("DOMContentLoaded", function () {
+            var form = document.getElementById("form");
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                let formDataObject = {};
+                formData.forEach(function (value, key) {
+                    formDataObject[key] = value;
+                });
+
+                // Step 3: Serialize JavaScript object to JSON
+                const formDataJSON = JSON.stringify(formDataObject);
+
+                console.log(formDataJSON);
+                $.post('/var/www/html/wordpress/wp-content/plugins/my_custom_plugin/my_custom_plugin.php',{
+                    formDataJSON : formDataJSON
+                });
+
+
+
+
+            //     $.ajax({
+            //     url:'/var/www/html/wordpress/wp-content/plugins/my_custom_plugin/my_custom_plugin.php',
+            //     method:'POST',
+            //     data: formDataJSON ,
+            //     success:function(response)
+            //     {
+            //         console.log("AJAX worked successfully");
+            //     },
+            //     error: function(jqXHR, textStatus, errorThrown){
+            //         console.log(errorThrown);
+            //     },
+                
+            // })
+            });
+          
+        });
+</script>
+</html>

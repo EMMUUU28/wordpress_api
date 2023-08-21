@@ -23,3 +23,6 @@ def receive_order_details(request):
     print(order_details)
     return JsonResponse({'success': 'Django Server Recieved data successfully'})
    
+def create_coupon(request):
+    
+    return render(request,"index.html")
