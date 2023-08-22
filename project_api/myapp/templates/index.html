@@ -7,8 +7,8 @@
 </head>
 <body>
     <h1>Create Coupon </h1>
-   <form id="form" action="" method="post">
-
+   <form id="form"   method="post">
+    {% csrf_token %}
     <label for="name">Coupon name: </label>
     <input name="name" type="text">
     <br>
@@ -37,26 +37,20 @@
                 const formDataJSON = JSON.stringify(formDataObject);
 
                 console.log(formDataJSON);
-                $.post('/var/www/html/wordpress/wp-content/plugins/my_custom_plugin/my_custom_plugin.php',{
-                    formDataJSON : formDataJSON
-                });
-
-
-
-
-            //     $.ajax({
-            //     url:'/var/www/html/wordpress/wp-content/plugins/my_custom_plugin/my_custom_plugin.php',
-            //     method:'POST',
-            //     data: formDataJSON ,
-            //     success:function(response)
-            //     {
-            //         console.log("AJAX worked successfully");
-            //     },
-            //     error: function(jqXHR, textStatus, errorThrown){
-            //         console.log(errorThrown);
-            //     },
+              
+                $.ajax({
+                url:'http://localhost/wordpress/',
+                method:'POST',
+                data: formDataJSON ,
+                success:function(response)
+                {
+                    console.log("AJAX worked successfully");
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                },
                 
-            // })
+            })
             });
           
         });

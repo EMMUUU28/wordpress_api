@@ -101,8 +101,6 @@ function order_details() {
 
 //    $json_response = json_encode($extracted_data);
 //    return $json_response;
-
-
  ?>  
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>

@@ -53,8 +53,8 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
     }
     else if(isset($_GET['action']) && $_GET['action'] === 'create_coupon'){
 
-        add_action( 'init', 'add_coupon' );
-
+        add_action('init','add_coupon');
+        
     }
 }       
 
@@ -69,34 +69,45 @@ add_action( 'woocommerce_thankyou', 'order_details' );
 // cs_21d90a059989a9b97f3e9db6e161f5795f993d94 -  Consumer secret 
 
 
-
-
-
-
-
-
 function add_coupon() {
    
-    $code="fish20";
-    if( wc_get_coupon_id_by_code( $code ) ) {
-        ?><script>console.log("The coupon already exists.")</script><?php
-        return;
-    } else {
-        echo 'Does not exist.';
-        $coupon = array(
-            'post_title' => $code, // dynamic coupon code
-            'post_content' => '',
-            'post_status' => 'publish',
-            'post_author' => 1,
-            'post_type' => 'shop_coupon'
-        );
-        $new_coupon_id = wp_insert_post( $coupon );
-        echo 'created coupon';
-    
+        $code="Pakkkk50";
+        $amount=50;
+        $expdate="2023-10-01";
+
+
+        if( wc_get_coupon_id_by_code( $code ) ) {
+          echo "The coupon already exists.";
+            return; 
+        } else {
+            echo 'Does not exist.';
+            $coupon = array(
+                'post_title' => $code, // dynamic coupon code
+                'post_content' => '',
+                'post_status' => 'publish',
+                'post_author' => 1,
+                'post_type' => 'shop_coupon',  
+            ); 
+            $new_coupon_id = wp_insert_post( $coupon );
+            echo 'created coupon';
+            update_post_meta( $new_coupon_id, 'coupon_amount', $amount );
+            update_post_meta( $new_coupon_id, 'expiry_date', $expdate );
+
+
+            // update_post_meta( $new_coupon_id, 'discount_type', $discount_type );
+            // update_post_meta( $new_coupon_id, 'coupon_amount', $amount );
+            // update_post_meta( $new_coupon_id, 'individual_use', 'no' );  
+            // update_post_meta( $new_coupon_id, 'product_ids', '' );
+            // update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
+            // update_post_meta( $new_coupon_id, 'usage_limit', '' );
+            // update_post_meta( $new_coupon_id, 'expiry_date', '' );
+            // update_post_meta( $new_coupon_id, 'apply_before_tax', 'yes' );
+            // update_post_meta( $new_coupon_id, 'free_shipping', 'no' );
+
+
+            }
+
     }
     
-}
-
-
-
+  
 

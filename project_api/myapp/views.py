@@ -3,6 +3,7 @@ import requests
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from urllib.parse import parse_qs
+import json 
 # Create your views here.
 def index(request):
     # url="http://localhost/wordpress/?action=store_data"
@@ -24,5 +25,10 @@ def receive_order_details(request):
     return JsonResponse({'success': 'Django Server Recieved data successfully'})
    
 def create_coupon(request):
+
+    name = request.POST.get('name')
+    amount = request.POST.get('amount')
+    data = {"name" : name,"amount" : amount}
+    print(data)
     
     return render(request,"index.html")
