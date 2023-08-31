@@ -7,8 +7,8 @@ import json
 # Create your views here.
 def index(request):
     # url="http://localhost/wordpress/?action=store_data"
-    # url="http://localhost/wordpress/?action=login_data"
-    url = "http://localhost/wordpress/?action=product_data"
+    url="http://localhost/wordpress/?action=login_data"
+    # url = "http://localhost/wordpress/?action=product_data"
 
 
     response = requests.get(url)
