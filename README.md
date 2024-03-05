@@ -19,3 +19,5 @@ Here's a short description of each API function:
 **product_details()**: This function retrieves details of all products available in the WooCommerce store, including their status, type, SKU, category, tags, etc., and returns them as JSON.
 
 These functions seem to provide various functionalities related to retrieving information about the WordPress store, its users, orders, and products.
+
+**To use this custom hook in a Django project, you can make HTTP requests to the WordPress site where the hook is defined, and handle the responses accordingly in your Django views or API endpoints.**
